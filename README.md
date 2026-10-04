@@ -21,4 +21,4 @@ A single HTML, CSS and JavaScript file with an explainable rule engine and the b
 Rule-based today. Future work: Bhashini languages, on-device OCR for screenshots, a trained ML classifier, official SEBI registry lookup, and an IVR or missed-call version.
 
 ## Credits
-Built by Rishav Kumar Pandey (B.Tech 1st year, Asansol Engineering College) with AI assistance (Claude by Anthropic).
+Built by Rishav Kumar Pandey (B.Tech 1st year, Asansol Engineering College) with some help of AI.
