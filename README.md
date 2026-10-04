@@ -13,6 +13,7 @@ No stock tips, no monetisation, no login, no data collection. All checking runs 
 
 ## Run it
 Open `index.html` in any browser. No install and no internet needed.
+Live demo: https://rishavp752.github.io/nivesh-kavach/
 
 ## Tech
 A single HTML, CSS and JavaScript file with an explainable rule engine and the browser Web Speech API.
@@ -22,3 +23,4 @@ Rule-based today. Future work: Bhashini languages, on-device OCR for screenshots
 
 ## Credits
 Built by Rishav Kumar Pandey (B.Tech 1st year, Asansol Engineering College) with some help of AI.
+
