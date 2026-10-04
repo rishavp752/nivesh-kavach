@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nivesh Kavach - Scam Check for Investors</title>
+<style>
+:root{--bg:#fbf7ef;--card:#fff;--tx:#241a1a;--mu:#6b5d5d;--ac:#8b1a1f;--h:#8b1a1f;--bd:#e6dccb;--lo:#2e7d32;--md:#b7791f;--hi:#c62828;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1414;--card:#251c1c;--tx:#f3e9e2;--mu:#b9a9a3;--ac:#b3262d;--h:#ffb4a8;--bd:#3a2c2c;--lo:#81c784;--md:#ffca6b;--hi:#ff8a80}}
+:root[data-theme="dark"]{--bg:#1a1414;--card:#251c1c;--tx:#f3e9e2;--mu:#b9a9a3;--ac:#b3262d;--h:#ffb4a8;--bd:#3a2c2c;--lo:#81c784;--md:#ffca6b;--hi:#ff8a80}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:8px}
+h1{font-size:1.4rem;margin:.2em 0;color:var(--h)}
+h2{font-size:1.1rem;margin:.2em 0 .5em}
+h3{font-size:1rem;margin:.9em 0 .3em}
+p{margin:.4em 0}
+.mu{color:var(--mu)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin:14px 0}
+textarea{width:100%;min-height:130px;padding:10px;margin-top:6px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+button{font:inherit;padding:10px 14px;border-radius:8px;border:1px solid var(--bd);background:var(--card);color:var(--tx);cursor:pointer;min-height:44px}
+.pri{background:var(--ac);color:#fff;border-color:var(--ac)}
+.row{display:flex;gap:8px;margin-top:8px}
+#samples{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.sm{min-height:36px;padding:6px 10px;font-size:.85rem}
+.bar{height:14px;border-radius:7px;background:var(--bd);overflow:hidden}
+.bar i{display:block;height:100%}
+li{margin:.35em 0}
+.ck{display:block;margin:.5em 0}
+summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
+footer{font-size:.8rem;color:var(--mu);text-align:center;margin:20px 0}
+</style></head>
+<body><main>
+<header><h1>🛡️ Nivesh Kavach</h1><button id="lang">हिंदी</button></header>
+<p id="tag" class="mu"></p><p id="sub"></p>
+<section class="card">
+<label for="msg" id="lbl"></label>
+<textarea id="msg"></textarea>
+<div class="row"><button id="go" class="pri"></button><button id="clr"></button></div>
+<div id="samples"></div>
+</section>
+<section id="out" class="card" hidden></section>
+<section id="pause" class="card"></section>
+<section id="paid" class="card"></section>
+<footer id="foot"></footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let L="en",last="";
+const F=[
+[30,/guarante|100\s*%|sure[\s\-]*shot|pakka|risk[\s\-]*free|no[\s\-]*risk|fixed\s*(profit|return)|गारंटी|पक्का|बिना\s*रिस्क/i,"Promises guaranteed or risk-free profit. No real investment can guarantee returns.","पक्के या बिना-रिस्क मुनाफ़े का वादा। कोई निवेश रिटर्न की गारंटी नहीं देता।"],
+[25,/\d{2,3}\s*%\s*(\w+\s*)?(daily|weekly|monthly|per\s*(day|week|month))|double\s*(your\s*)?(money|investment)|\d+\s*x\s*(return|profit)|दोगुना|डबल/i,"Promises unrealistic returns in a short time.","थोड़े समय में अवास्तविक रिटर्न का वादा।"],
+[20,/operator|insider|jackpot|multibagger|big\s*player|ऑपरेटर|जैकपॉट/i,"Talks of operators, insiders or jackpot stocks. This is a pump-and-dump pattern.","ऑपरेटर, इनसाइडर या जैकपॉट शेयर की बात। यह पंप-एंड-डंप का तरीका है।"],
+[15,/limited\s*(seats|slots|time|offer)|hurry|last\s*chance|today\s*only|join\s*(now|fast|immediately)|only\s*\d+\s*(seats|slots)|जल्दी|आज\s*ही|सीमित/i,"Creates urgency so you do not stop to think.","जल्दबाज़ी कराई जा रही है ताकि आप सोच न सकें।"],
+[20,/(vip|premium|paid)\s*(group|channel|membership|plan)|(registration|joining)\s*fee|वीआईपी|रजिस्ट्रेशन\s*फीस/i,"Asks for money to join a tips group or channel.","टिप्स ग्रुप या चैनल जॉइन करने के लिए पैसे माँगे जा रहे हैं।"],
+[35,/anydesk|teamviewer|quicksupport|rustdesk|\.apk\b|(download|install)\s*(the\s*|this\s*)?app|ऐप\s*(डाउनलोड|इंस्टॉल)/i,"Asks you to install an app or remote-access tool. Fraudsters use these to see your screen and OTPs.","ऐप या रिमोट-एक्सेस टूल इंस्टॉल करने को कहा। ठग इससे आपकी स्क्रीन और OTP देख लेते हैं।"],
+[30,/\botp\b|\bcvv\b|\bpin\b|kyc\s*(update|expire|pending)|account\s*(will\s*be\s*)?(block|suspend|freez)|ओटीपी|केवाईसी/i,"Asks for OTP or PIN, or threatens to block your account over KYC.","OTP या PIN माँगा, या KYC के नाम पर अकाउंट बंद करने की धमकी दी।"],
+[35,/(fee|tax|charge|deposit)\s*(to|for)\s*(withdraw|release|unlock)|withdraw(al)?\s*(fee|tax|charge)|release\s*(your\s*)?(profit|funds?)/i,"Asks you to pay more to withdraw your own money. This is a classic scam step.","अपना ही पैसा निकालने के लिए और पैसे माँगना ठगी का आम तरीका है।"],
+[25,/(upi|paytm|phonepe|gpay)\s*[:\-]?\s*[\w.\-]+@\w+|(send|transfer|pay)\s*(money|amount|₹|rs\.?)/i,"Asks you to pay into a personal UPI or bank account.","किसी व्यक्तिगत UPI या बैंक खाते में पैसे भेजने को कहा।"],
+[20,/(don'?t|do\s*not)\s*(tell|share)|keep\s*(it\s*)?(secret|confidential)|kisi\s*ko\s*(mat|na)|किसी\s*को\s*(मत|न)\s*बताना/i,"Asks you to keep it secret from family or friends.","परिवार या दोस्तों से छुपाने को कहा।"],
+[10,/sebi[\s\-]*(registered|approved|certified|authori[sz]ed)|सेबी\s*(रजिस्टर्ड|मान्य)/i,"Claims SEBI registration. Fake claims are common, so verify it yourself.","SEBI पंजीकरण का दावा। नकली दावे आम हैं, खुद जाँचें।"],
+[15,/bit\.ly|tinyurl|\bcutt\.ly|\bt\.co\b|\bwa\.me\b|\bt\.me\b|chat\.whatsapp\.com|telegram\.me|\.(xyz|top|icu)\b/i,"Has a short link or group invite that hides where it leads. Do not click.","छोटा लिंक या ग्रुप-इनवाइट जो असली पता छुपाता है। क्लिक न करें।"],
+[15,/forex|crypto|usdt|bitcoin|binary\s*option|ipo\s*(allotment\s*)?guarantee|pre[\s\-]?ipo/i,"Mentions high-risk or unregulated products.","ज़्यादा जोखिम वाले या अनियमित प्रोडक्ट का ज़िक्र।"],
+[15,/finance\s*minister|nirmala|ambani|adani|modi|ceo\s*of|endorsed\s*by/i,"Uses a famous name as endorsement. Deepfake videos of celebrities are common.","मशहूर नाम से प्रचार। मशहूर लोगों के डीपफेक वीडियो आम हैं।"]
+];
+const S=[
+["🔥 Tip-group scam","🔥 टिप-ग्रुप स्कैम","SEBI registered VIP group! Join now, guaranteed 30% profit weekly, 100% sure shot calls from our operator. Only 5 slots left! Pay Rs 4999 registration fee on UPI: tipsking@okaxis. Download the app from bit.ly/3xAb. Don't tell anyone."],
+["📞 KYC call (Hinglish)","📞 KYC कॉल (हिंग्लिश)","Sir aapka KYC update pending hai, account block ho jayega. Abhi AnyDesk download karke code bhejiye. OTP kisi ko mat batana, sirf humein bataiye."],
+["🎓 Webinar invite","🎓 वेबिनार न्योता","Free webinar: learn how mutual funds work from SEBI-registered adviser INH000123456. Limited seats, join now: chat.whatsapp.com/abc123"],
+["✅ Nominee reminder","✅ नॉमिनी रिमाइंडर","Reminder: please add a nominee to your demat account before month end. Details are on your depository's official website."]
+];
+const T={
+en:{tag:"Scam and claim checker for everyday investors",sub:"Paste a WhatsApp, Telegram or SMS message. Get a plain-language check. Nothing leaves your phone.",lbl:"Paste the message here",go:"Check message",clr:"Clear",smp:"Try an example:",short:"Please paste a longer message.",
+lv:{H:"Many warning signs",M:"Some warning signs",L:"Few warning signs found"},why:"Why this was flagged",none:"No known scam patterns found.",now:"What to do now",
+note:"This is a pattern check, not a verdict. A low score does not prove safety and a high score does not prove fraud. Always verify on official websites.",
+reg:"Registration-style number found ({n}). Anyone can copy a real number, so check that the name and number match on the official SEBI list (sebi.gov.in).",
+noreg:"Claims SEBI registration but gives no number. Real advisers show their number.",say:"🔊 Read aloud",
+pt:"Pause check: before you send money",
+p:["Someone is pushing me to act today","I was promised a fixed or guaranteed return","I cannot explain how the money is made","I am using borrowed or emergency money"],
+pr:["Good. Keep asking: who earns if I act on this?","Be careful. Take a day to think before you decide.","Stop. Wait 24 hours and talk to someone you trust before sending anything."],
+pd:"Already paid? What to do",
+ps:["Call 1930 (cyber-crime helpline) right away. Speed matters.","Report at cybercrime.gov.in.","Tell your bank immediately.","Save screenshots, chats and transaction IDs.","If a broker or adviser is involved, file a complaint on SEBI SCORES (scores.sebi.gov.in)."],
+A:{H:["Do not pay, click or install anything.","Never share OTP, PIN or your screen.","Take a screenshot and leave the group.","Wait 24 hours and show it to a family member."],M:["Do not send money today.","Check the sender's name and SEBI number on the official SEBI website.","Ask yourself: who earns if I act on this?"],L:["No known pattern found, but that does not prove it is safe.","Do not act on tips. Verify any registration on the SEBI website."]},
+foot:"Nivesh Kavach gives no stock tips, shows no ads, asks for no login and keeps your text on your device. Built for the SANGYAN Investor Resilience Hackathon."},
+hi:{tag:"आम निवेशकों के लिए स्कैम और दावा जाँच",sub:"WhatsApp, Telegram या SMS का मैसेज यहाँ चिपकाएँ। सरल भाषा में जाँच पाएँ। आपका डेटा फ़ोन से बाहर नहीं जाता।",lbl:"मैसेज यहाँ चिपकाएँ",go:"मैसेज जाँचें",clr:"साफ़ करें",smp:"उदाहरण आज़माएँ:",short:"कृपया लंबा मैसेज चिपकाएँ।",
+lv:{H:"कई खतरे के संकेत",M:"कुछ खतरे के संकेत",L:"कम संकेत मिले"},why:"यह क्यों चिह्नित हुआ",none:"कोई जाना-पहचाना स्कैम पैटर्न नहीं मिला।",now:"अब क्या करें",
+note:"यह सिर्फ़ पैटर्न जाँच है, फ़ैसला नहीं। कम स्कोर का मतलब सुरक्षित होना नहीं, और ज़्यादा स्कोर का मतलब पक्की ठगी नहीं। हमेशा आधिकारिक वेबसाइट पर जाँचें।",
+reg:"रजिस्ट्रेशन जैसा नंबर मिला ({n})। असली नंबर कोई भी कॉपी कर सकता है, इसलिए SEBI की आधिकारिक सूची (sebi.gov.in) में नाम और नंबर मिलाएँ।",
+noreg:"SEBI पंजीकरण का दावा है पर नंबर नहीं दिया। असली सलाहकार अपना नंबर बताते हैं।",say:"🔊 सुनें",
+pt:"रुकिए: पैसे भेजने से पहले जाँच",
+p:["कोई मुझ पर आज ही करने का दबाव डाल रहा है","मुझे तय या गारंटीशुदा रिटर्न का वादा मिला है","मैं समझा नहीं सकता कि पैसा कैसे बनेगा","मैं उधार या इमरजेंसी का पैसा लगा रहा हूँ"],
+pr:["अच्छा है। फिर भी पूछते रहिए: मेरे करने से किसे कमाई होगी?","सावधान। एक दिन रुककर सोचिए, फिर फ़ैसला कीजिए।","रुकिए। कुछ भी भेजने से पहले 24 घंटे रुकें और किसी भरोसेमंद व्यक्ति से बात करें।"],
+pd:"पैसे भेज चुके हैं? क्या करें",
+ps:["तुरंत 1930 (साइबर क्राइम हेल्पलाइन) पर कॉल करें। जितनी जल्दी, उतना बेहतर।","cybercrime.gov.in पर शिकायत दर्ज करें।","अपने बैंक को तुरंत बताएँ।","स्क्रीनशॉट, चैट और ट्रांज़ैक्शन ID सँभालकर रखें।","अगर ब्रोकर या सलाहकार शामिल है तो SEBI SCORES (scores.sebi.gov.in) पर शिकायत करें।"],
+A:{H:["कुछ भी भेजें, क्लिक करें या इंस्टॉल न करें।","OTP, PIN या स्क्रीन किसी से साझा न करें।","स्क्रीनशॉट लेकर ग्रुप छोड़ दें।","24 घंटे रुकें और परिवार के किसी सदस्य को दिखाएँ।"],M:["आज पैसे न भेजें।","भेजने वाले का नाम और SEBI नंबर SEBI की वेबसाइट पर जाँचें।","खुद से पूछें: मेरे करने से किसे कमाई होगी?"],L:["कोई पैटर्न नहीं मिला, पर इसका मतलब सुरक्षित होना नहीं है।","टिप्स पर भरोसा न करें। रजिस्ट्रेशन SEBI की वेबसाइट पर जाँचें।"]},
+foot:"निवेश कवच कोई शेयर टिप नहीं देता, विज्ञापन नहीं दिखाता, लॉगिन नहीं माँगता, और आपका टेक्स्ट आपके फ़ोन पर ही रहता है। SANGYAN निवेशक रेज़िलिएंस हैकाथॉन के लिए बनाया गया।"}
+};
+const t=k=>T[L][k];
+function draw(){
+ document.documentElement.lang=L;
+ $("lang").textContent=L=="en"?"हिंदी":"English";
+ $("tag").textContent=t("tag");$("sub").textContent=t("sub");$("lbl").textContent=t("lbl");
+ $("go").textContent=t("go");$("clr").textContent=t("clr");$("foot").textContent=t("foot");
+ $("samples").innerHTML='<span class="mu">'+t("smp")+'</span>'+S.map((s,i)=>'<button class="sm" data-i="'+i+'">'+s[L=="hi"?1:0]+'</button>').join("");
+ $("pause").innerHTML='<h2>'+t("pt")+'</h2>'+t("p").map(q=>'<label class="ck"><input type="checkbox" class="pc"> '+q+'</label>').join("")+'<p id="pr" class="mu"></p>';
+ document.querySelectorAll(".pc").forEach(c=>{c.onchange=pcheck});
+ $("paid").innerHTML='<details><summary><b>'+t("pd")+'</b></summary><ol>'+t("ps").map(a=>'<li>'+a+'</li>').join("")+'</ol></details>';
+}
+function pcheck(){
+ const n=document.querySelectorAll(".pc:checked").length;
+ $("pr").textContent=t("pr")[n>=2?2:n];
+}
+function analyze(){
+ const x=$("msg").value.trim(),o=$("out");
+ o.hidden=false;
+ if(x.length<8){o.innerHTML="<p>"+t("short")+"</p>";last="";return}
+ const h=F.filter(f=>f[1].test(x));
+ const s=Math.min(100,h.reduce((a,f)=>a+f[0],0));
+ const lv=s>=50?"H":s>=20?"M":"L";
+ const col={H:"var(--hi)",M:"var(--md)",L:"var(--lo)"}[lv];
+ const reg=x.match(/\bIN[HAZPM]\d{9}\b/gi);
+ const sc=/sebi[\s\-]*(registered|approved|certified|authori[sz]ed)|सेबी\s*(रजिस्टर्ड|मान्य)/i.test(x);
+ let ex="";
+ if(reg){ex=t("reg").replace("{n}",reg[0].toUpperCase())}else if(sc){ex=t("noreg")}
+ o.innerHTML='<h2 style="color:'+col+'">'+t("lv")[lv]+' ('+s+'/100)</h2><div class="bar"><i style="width:'+Math.max(s,4)+'%;background:'+col+'"></i></div>'
+ +'<h3>'+t("why")+'</h3>'+(h.length?'<ul>'+h.map(f=>'<li>'+f[L=="hi"?3:2]+'</li>').join("")+'</ul>':'<p>'+t("none")+'</p>')
+ +(ex?'<p>ℹ️ '+ex+'</p>':'')
+ +'<h3>'+t("now")+'</h3><ol>'+t("A")[lv].map(a=>'<li>'+a+'</li>').join("")+'</ol>'
+ +'<p class="mu">'+t("note")+'</p><button id="say">'+t("say")+'</button>';
+ last=o.innerText.replace(t("say"),"");
+ $("say").onclick=say;
+ o.scrollIntoView();
+}
+function say(){
+ try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(last);u.lang=L=="hi"?"hi-IN":"en-IN";u.rate=0.9;speechSynthesis.speak(u)}catch(e){}
+}
+$("go").onclick=analyze;
+$("clr").onclick=()=>{$("msg").value="";$("out").hidden=true;try{speechSynthesis.cancel()}catch(e){}};
+$("samples").onclick=e=>{const b=e.target.closest("button");if(b){$("msg").value=S[b.dataset.i][2];analyze()}};
+$("lang").onclick=()=>{L=L=="en"?"hi":"en";draw();if(!$("out").hidden&&$("msg").value.trim())analyze()};
+draw();
+</script></body></html>
